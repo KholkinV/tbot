@@ -1,0 +1,25 @@
+version: "3.7"
+
+volumes:
+    tbot-postgres:
+     external: true
+
+services:
+
+    postgres:
+      image: postgres:11
+      container_name: tbot-postgres
+      restart: on-failure
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "1m"
+          max-file: "10"
+      environment:
+        - POSTGRES_DB=tbot
+        - POSTGRES_USER=tbotuser
+        - POSTGRES_PASSWORD=qwe0151360
+      ports: 
+       - 5432:5432
+      volumes:
+        - tbot-postgres:/var/lib/postgresql/data
